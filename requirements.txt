@@ -1,0 +1,6 @@
+pyautogui==0.9.53
+Pillow==8.3.2
+opencv-python==4.5.3
+numpy==1.21.2
+requests==2.26.0
+pyperclip==1.8.2
