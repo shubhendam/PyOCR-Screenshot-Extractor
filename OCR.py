@@ -8,7 +8,6 @@ import io
 import json
 import pyperclip
 
-#pip install Pillow --upgrade    -- use this
 
 def capture_screenshot():
 
@@ -26,7 +25,7 @@ def capture_screenshot():
     #optional
     print('ending')
 
-    # Wait for the mouse button to be released
+    # Wait for the mouse to move to different location
     while True:
         current_pos = pyautogui.position()
 
@@ -35,16 +34,16 @@ def capture_screenshot():
             break
 
     # Get the coordinates of the selected rectangle
-    left = min(initial_pos[0], current_pos[0])
-    top = min(initial_pos[1], current_pos[1])
+    top = min(initial_pos[0], current_pos[0])
+    bottom = min(initial_pos[1], current_pos[1])
     width = abs(current_pos[0] - initial_pos[0])
     height = abs(current_pos[1] - initial_pos[1])
 
     # Capture the selected area as a screenshot
-    screenshot = pyautogui.screenshot(region=(left, top, width, height))
+    screenshot = pyautogui.screenshot(region=(top, bottom, width, height))
     screenshot.save('screenshot.jpg')
 
-#code has started beep
+#code has started indicator beep
 winsound.Beep(1000, 500)
 time.sleep(1)
 capture_screenshot()
@@ -52,15 +51,11 @@ capture_screenshot()
 #load image
 img = cv2.imread("screenshot.jpg")
 
-#get image height width info
-#height , width , _ = img.shape
-
-
 #ocr api call
 url_api = "https://api.ocr.space/parse/image"
 
-#compress the image cuz 1mb max
-_, compressedimage = cv2.imencode(".jpg", img,[1, 90])  #compress to jpg, image, [1=compressJPG ,90= compression number
+#compress the image because 1mb max for free account
+_, compressedimage = cv2.imencode(".jpg", img,[1, 90])  #compress to jpg, image, [1=compressJPG ,90= compression number]
 
 #incode the image
 file_bytes = io.BytesIO(compressedimage)
@@ -70,24 +65,20 @@ result = requests.post(url_api,
               files={"screenshot1.jpg": file_bytes},
               data = {"apikey" :"<YOUR_API_KEY>"})
 
-#just result will give response 200 as print cuz  that means all good
-#print(result)
-
-#convert to json so to can extract test from dictonary
-#print(result.content.decode())
-
+#convert to json so to can extract text from dictonary
 result = result.content.decode()
 result = json.loads(result)
 
 #just take parsedtest only 
 test_detected = result.get("ParsedResults")[0].get("ParsedText")
 
-#copy the variable
+#copy the variable in cipboard
 pyperclip.copy(test_detected)
 
-#print
+#optional print statement
 print(test_detected)
-winsound.Beep(1200, 300)
+
+#final beep to indicate the code has been executed 
 winsound.Beep(1200, 300)
 
 #show image
