@@ -94,24 +94,3 @@ winsound.Beep(1200, 300)
 cv2.imshow("Img", img)
 #cv2.waitKey(0)
 cv2.destroyAllWindows()
-
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
