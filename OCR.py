@@ -68,7 +68,7 @@ file_bytes = io.BytesIO(compressedimage)
 #request api call
 result = requests.post(url_api,
               files={"screenshot1.jpg": file_bytes},
-              data = {"apikey" :"<Your API Key>"})
+              data = {"apikey" :"<YOUR_API_KEY>"})
 
 #just result will give response 200 as print cuz  that means all good
 #print(result)
