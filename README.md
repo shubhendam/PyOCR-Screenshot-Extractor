@@ -17,7 +17,7 @@ Before running the script, ensure that you have the following Python libraries i
 
 You can install these libraries using pip. Open a command prompt and run the following command :
 
-pip install -r requirements.txt
+#pip install -r requirements.txt
 
 
 ## Getting Started
