@@ -15,7 +15,9 @@ Before running the script, ensure that you have the following Python libraries i
 - requests
 - pyperclip
 
-You can install these libraries using pip. Open a command prompt and run the following command:
+You can install these libraries using pip. Open a command prompt and run the following command :
+
+pip install -r requirements.txt
 
 
 ## Getting Started
